@@ -1,0 +1,56 @@
+﻿@using Teams.Core.DTO
+@model List<EmployeeDTO>
+
+    <h3>    Personel Listesi    </h3>
+
+
+
+
+
+    <form asp-action="Index2" asp-controller="EmpList" method="post">
+        <Label> Adı:  </Label> <input type="text" name="FirstName" value="" /><br />
+        <Label> Soyadı:  </Label><input type="text" name="LastName" value="" /><br />
+        <label for="Title">Ünvan Seçin:</label>
+        <select name="TitleName">
+            <option value="teamLeader">teamLeader</option>
+            <option value="analyst">analyst</option>
+            <option value="developer">developer</option>
+            <option value="tester">tester</option>
+        </select>
+        <label for="Team">Takım Seçin:</label>
+        <select name="TeamsName">
+            <option value="A">Takım A</option>
+            <option value="B">Takım B</option>
+            <option value="C">Takım C</option>
+        </select><br />
+        <input type="submit" name="name" value="Kaydet" />
+    </form>
+
+    <br />  
+    <br />  
+
+
+    <table class="table-bordered table-hover table-striped">
+        <thead>
+            <tr>
+                <th>Personel ID</th>
+                <th>Personel Adı</th>
+                <th>Personel Soyadı</th>
+                <th>Personel Ünvanı</th>
+                <th>Personel Takımı</th>
+            </tr>
+
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+               <tr>
+                   <td>@item.PersonID</td>
+                   <td>@item.FirstName</td>
+                   <td>@item.LastName</td>
+                   <td>@item.TitleName</td>
+                   <td>@item.TeamsName</td>                  
+               </tr>
+            }
+        </tbody>
+    </table>
