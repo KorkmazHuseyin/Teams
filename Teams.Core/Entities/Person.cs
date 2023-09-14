@@ -8,12 +8,13 @@ using System.Threading.Tasks;
 namespace Teams.Core.Entities
 {
     public class Person
-    {   [Key]
+    {
         public int PersonID { get; set; }
-
         public string FirstName { get; set; }
-
         public string LastName { get; set; }
+
+       
+        public virtual ICollection<PersonDetail> PersonDetail { get; set; }
 
     }
 }

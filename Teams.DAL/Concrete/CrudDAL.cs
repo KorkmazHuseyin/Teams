@@ -17,11 +17,62 @@ namespace Teams.DAL.Concrete
         {
             _db = db;
         }
-        public EmployeeDTO Add(EmployeeDTO Empinfo)
+        public  bool Add(EmployeeDTO Empinfo)
         {
-            _db.Add(Empinfo);// Bakarım hata alırsam
+            Team team = new Team() {TeamsName=Empinfo.TeamsName};
+            Title title = new Title() { TitleName=Empinfo.TitleName};
+
+            if ((_db.Title.FirstOrDefault(a => a.TitleName == Empinfo.TitleName) == null))
+            {
+                title = _db.Title.Add(new Title()
+                {
+                    TitleName = Empinfo.TitleName
+                }).Entity;
+            }
+            else
+            {
+                title = _db.Title.FirstOrDefault(a => a.TitleName == Empinfo.TitleName);
+            }
             _db.SaveChanges();
-            return Empinfo;
+            if ((_db.Team.FirstOrDefault(a => a.TeamsName == Empinfo.TeamsName) == null))
+            {
+                team = _db.Team.Add(new Team()
+                {
+                    TeamsName = Empinfo.TeamsName
+                }).Entity;
+            }
+            else
+            {
+                team = _db.Team.FirstOrDefault(a => a.TeamsName == Empinfo.TeamsName);
+            }
+            _db.SaveChanges();
+
+
+            Person person =_db.Person.Add(new Person()
+            {
+                FirstName = Empinfo.FirstName,
+                LastName = Empinfo.LastName
+            }).Entity;
+            _db.SaveChanges();
+
+
+            _db.PersonDetail.Add(new PersonDetail
+            {
+                PersonID=person.PersonID,
+                TeamID=team.TeamID,
+                TitleID=title.TitleID            
+            });
+          var donenDeger=  _db.SaveChanges();
+
+            if (donenDeger>0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+           
         }
      
         public List<EmployeeDTO> GetAll()

@@ -9,9 +9,10 @@ namespace Teams.Core.Entities
 {
    public class Team
     {
-        [Key]
         public int TeamID { get; set; }
-
         public string TeamsName { get; set; }
+
+      
+        public virtual ICollection<PersonDetail> PersonDetail { get; set; }
     }
 }

@@ -9,7 +9,7 @@ namespace Teams.DAL.Interfaces
 {
    public interface ICrudDAL
     {
-        EmployeeDTO Add(EmployeeDTO Emp);
+        bool Add(EmployeeDTO Emp);
 
         List<EmployeeDTO> GetAll();
     }

@@ -9,13 +9,13 @@ namespace Teams.Core.Entities
 {
     public class PersonDetail
     {
-        [Key]
         public int PersonDetailID { get; set; }
+        public Nullable<int> PersonID { get; set; }
+        public Nullable<int> TeamID { get; set; }
+        public Nullable<int> TitleID { get; set; }
 
-        public int PersonID { get; set; }
-
-        public int TeamID { get; set; }
-
-        public int TitleID { get; set; }
+        public virtual Person Person { get; set; }
+        public virtual Team Team { get; set; }
+        public virtual Title Title { get; set; }
     }
 }
